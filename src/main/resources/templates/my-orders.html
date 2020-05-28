@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<header>
+    <th:block th:include="~{fragments/navbar}"></th:block>
+</header>
+<main class="mt-3">
+    <h1 class="text-center text-dark">My Orders</h1>
+    <hr class="hr-2 bg-dark w-75">
+    <table class="table table-hover w-75 mx-auto">
+        <thead>
+        <tr class="row mx-auto">
+            <th class="col-md-4 text-center">Order ID</th>
+            <th class="col-md-2 text-center">Product name</th>
+            <th class="col-md-2 text-center">Price</th>
+            <th class="col-md-2 text-center">Image</th>
+            <th class="col-md-2 text-center">Details</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <th:block th:each="product: ${products}">
+            <tr class="row mx-auto">
+                <th class="col-md-4 text-center" th:text="${product.id}"></th>
+                <td class="col-md-2 text-center" th:text="${product.name}"></td>
+                <td class="col-md-2 text-center" th:text="${product.price}"></td>
+                <td class="col-md-2 text-center">
+                    <div><img th:src="${product.imageUrl}" th:alt="Picture" class="img-thumbnail" width="50"
+                              height="50">
+
+                    </div>
+                </td>
+                <td class="col-md-2 text-center">
+                    <button  class="btn btn-dark" type="button"  data-toggle="modal"
+                             data-target="#detailsModal">Details</button>
+                </td>
+            </tr>
+            <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body ">
+                            <div class="picture-handler">
+                                <img th:src="${product.imageUrl}" th:alt="Picture" class="img-fluid" height="200" width="200">
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-12 text-center">
+                                    <h1 th:text="${product.name}"></h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-12 text-center">
+                                    <h4 th:text="'Price '+ ${product.price} +' $'"></h4>
+                                </div>
+                            </div>
+                            <hr class="hr-2 bg-dark">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </th:block>
+
+        </tbody>
+    </table>
+    <hr class="hr-2 bg-dark">
+</main>
+
+<th:block th:include="~{fragments/footer}"></th:block>
+</body>
+</html>

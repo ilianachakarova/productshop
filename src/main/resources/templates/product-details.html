@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+    <style>
+        img{
+            height: 100px;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <th:block th:include="~{fragments/navbar}"></th:block>
+</header>
+<main class="mt-3">
+    <div class="jumbotron bg-light">
+        <div class="text-center">
+            <img th:src="${model.imageUrl}" th:alt="Picture" class="img-thumbnail" width="400"
+                      height="400">
+        </div>
+        <div class="row">
+            <div class="col col-md-12 text-center">
+                <h1 th:text="${model.name}"></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-12 text-center">
+                <h4 th:text="'Price '+ ${model.price} +' $'"></h4>
+            </div>
+        </div>
+        <hr class="hr-2 bg-dark">
+        <form th:action="@{/products/order/{id}(id=${model.id})}" method="post">
+            <div class="button-holder d-flex justify-content-center">
+            <button  class="btn btn-success">Order</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<th:block th:include="~{fragments/footer}"></th:block>
+</body>
+</html>
